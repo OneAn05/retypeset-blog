@@ -4,6 +4,7 @@ import type { Language } from '@/i18n/config'
 import { getCollection, render } from 'astro:content'
 import Comment from '@/components/Comment/Index.astro'
 import PostDate from '@/components/PostDate.astro'
+import PostSignature from '@/components/PostSignature.astro'
 import TagList from '@/components/TagList.astro'
 import BackButton from '@/components/Widgets/BackButton.astro'
 import TOC from '@/components/Widgets/TOC.astro'
@@ -132,5 +133,6 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
       <!-- Comment -->
       <Comment />
     </div>
+    {post.data.signatureDate && <PostSignature date={post.data.signatureDate} />}
   </article>
 </Layout>

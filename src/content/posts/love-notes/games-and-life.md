@@ -8,6 +8,7 @@ tags:
   - 游戏
 lang: zh
 abbrlink: games-and-life
+signatureDate: July 12th, 2026
 ---
 
 
@@ -56,8 +57,3 @@ abbrlink: games-and-life
 因为真正让我期待的，从来不是下一次通关的胜利，而是下一次开始的时候，屏幕那头依然有你。
 
 毕竟，山海自有归期，风雨自有相逢。而我们此刻一起度过的每一次重启、每一次调整、每一次“没关系，再来一次”，或许都是时间替我们写下的、最朴素也最温柔的伏笔。
-
-<div style="position: fixed; bottom: 20px; right: 30px; font-family: 'BNXJSDJW', '思源宋体', serif; font-size: 22px; color: #000000; font-weight: bold; text-align: right; line-height: 1.6; z-index: 9999;">
-  <img src="../../images/signature.svg" alt="赵宇航签名" style="width: 100px; height: auto;" />
-  <div style="margin-top: 4px;">July 12th, 2026</div>
-</div>

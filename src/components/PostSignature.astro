@@ -1,0 +1,61 @@
+---
+import { base } from '@/config'
+
+interface Props {
+  date: string
+}
+
+const { date } = Astro.props
+---
+
+<aside class="post-signature" aria-label={`文章落款：${date}`}>
+  <img src={`${base}/images/signature.svg`} alt="赵宇航签名" />
+  <div>{date}</div>
+</aside>
+
+<style>
+  .post-signature {
+    position: fixed;
+    z-index: 9999;
+    right: 30px;
+    bottom: 20px;
+    color: #000;
+    font-family: 'BNXJSDJW', 'Source Han Serif SC', 'Noto Serif CJK SC', serif;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.6;
+    text-align: right;
+    pointer-events: none;
+  }
+
+  .post-signature img {
+    display: block;
+    width: 100px;
+    height: auto;
+    margin-left: auto;
+  }
+
+  .post-signature div {
+    margin-top: 4px;
+  }
+
+  :global(html.dark) .post-signature {
+    color: #fff;
+  }
+
+  :global(html.dark) .post-signature img {
+    filter: invert(1);
+  }
+
+  @media (max-width: 767px) {
+    .post-signature {
+      right: 16px;
+      bottom: 16px;
+      font-size: 14px;
+    }
+
+    .post-signature img {
+      width: 78px;
+    }
+  }
+</style>
