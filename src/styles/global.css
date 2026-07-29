@@ -7,8 +7,8 @@ html {
 }
 
 /* Use the supplied typeface only for Traditional Chinese content areas. */
-html[lang="zh-TW"] :is(.heti, .tag-list) {
-  font-family: "JiZhuZuiHaoShiDeMoYang", ui-sans-serif, system-ui, sans-serif;
+html[lang="zh-TW"] :is(.heti, .tag-list, .post-list h3) {
+  font-family: "Huiwen Mingchao", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 /* Fix Flash Issue On iOS */

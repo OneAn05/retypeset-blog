@@ -7,6 +7,13 @@
 }
 
 @font-face {
+  font-family: "Huiwen Mingchao";
+  src: url("/fonts/HuiwenMingchao.otf") format("opentype");
+  font-display: swap;
+  font-weight: 400 700;
+}
+
+@font-face {
   font-family: "Snell-Bold";
   src: url("/fonts/Snell-Bold-SF.woff2") format("woff2");
   font-display: swap;
