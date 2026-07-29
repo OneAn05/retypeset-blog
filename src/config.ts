@@ -88,7 +88,7 @@ export const themeConfig: ThemeConfig = {
       categoryId: 'DIC_kwDOTnbJ4c4DCQXb',
       mapping: 'pathname',
       strict: '0',
-      reactionsEnabled: '1',
+      reactionsEnabled: '0',
       emitMetadata: '0',
       inputPosition: 'bottom',
     },
