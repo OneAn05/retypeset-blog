@@ -173,7 +173,7 @@ export const themeConfig: ThemeConfig = {
       },
       {
         name: 'Email',
-        url: 'you@example.com',
+        url: 'OneAn05@163.com',
       },
       // {
       //   name: 'X',
