@@ -6,30 +6,9 @@ html {
   text-autospace: normal;
 }
 
-/* Use the supplied typeface and larger type only for Traditional Chinese content. */
-html[lang="zh-TW"] :is(.heti, .tag-list, .post-list h3) {
+/* Use the supplied typeface only for Traditional Chinese content areas. */
+html[lang="zh-TW"] :is(.heti, .tag-list) {
   font-family: "JiZhuZuiHaoShiDeMoYang", ui-sans-serif, system-ui, sans-serif;
-}
-
-html[lang="zh-TW"] .heti {
-  font-size: 1.125rem;
-}
-
-html[lang="zh-TW"] .heti .post-title {
-  font-size: 2.4rem;
-}
-
-html[lang="zh-TW"] .heti :where(h1) { font-size: 2rem; }
-html[lang="zh-TW"] .heti :where(h2) { font-size: 1.75rem; }
-html[lang="zh-TW"] .heti :where(h3) { font-size: 1.45rem; }
-html[lang="zh-TW"] .heti :where(h4) { font-size: 1.3rem; }
-html[lang="zh-TW"] .heti :where(h5) { font-size: 1.15rem; }
-html[lang="zh-TW"] .post-list h3 a { font-size: 1.125rem; }
-html[lang="zh-TW"] .tag-list { font-size: 1.125rem; }
-
-@media (min-width: 1024px) {
-  html[lang="zh-TW"] .heti .post-title { font-size: 2.55rem; }
-  html[lang="zh-TW"] .post-list h3 a { font-size: 1.25rem; }
 }
 
 /* Fix Flash Issue On iOS */
