@@ -7,7 +7,7 @@ html {
 }
 
 /* Use the supplied typeface only for Traditional Chinese content areas. */
-html[lang="zh-TW"] :is(.heti, .post-list, .tag-list) {
+html[lang="zh-TW"] :is(.heti, .tag-list) {
   font-family: "JiZhuZuiHaoShiDeMoYang", ui-sans-serif, system-ui, sans-serif;
 }
 
