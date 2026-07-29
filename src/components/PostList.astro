@@ -17,7 +17,7 @@ const { posts, lang, pinned = false } = Astro.props
 const isHome = isHomePage(Astro.url.pathname)
 ---
 
-<ul>
+<ul class="post-list">
   {posts.map((post) => {
     const slug = post.data.abbrlink || post.id
 

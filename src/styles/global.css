@@ -6,6 +6,11 @@ html {
   text-autospace: normal;
 }
 
+/* Use the supplied typeface only for Traditional Chinese content areas. */
+html[lang="zh-TW"] :is(.heti, .post-list, .tag-list) {
+  font-family: "JiZhuZuiHaoShiDeMoYang", ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Fix Flash Issue On iOS */
 body {
   backface-visibility: hidden;
