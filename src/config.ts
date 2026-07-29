@@ -78,14 +78,14 @@ export const themeConfig: ThemeConfig = {
   // COMMENT SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   comment: {
     // enable comment system
-    enabled: false, // true | false
+    enabled: true, // true | false
     // giscus
     // https://giscus.app/
     giscus: {
-      repo: '',
-      repoId: '',
-      category: '',
-      categoryId: '',
+      repo: 'OneAn05/retypeset-blog',
+      repoId: 'R_kgDOTnbJ4Q',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDOTnbJ4c4DCQXb',
       mapping: 'pathname',
       strict: '0',
       reactionsEnabled: '1',
