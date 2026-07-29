@@ -1,7 +1,10 @@
 import { glob } from 'astro/loaders'
 import { z } from 'astro/zod'
 import { defineCollection } from 'astro:content'
-import { allLocales, themeConfig } from '@/config'
+import { themeConfig } from '@/config'
+
+// Keep inactive translation source files valid without generating their routes.
+const contentLocales = ['', 'de', 'en', 'es', 'fr', 'ja', 'ko', 'pl', 'pt', 'ru', 'zh', 'zh-tw'] as const
 
 const posts = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
@@ -20,7 +23,7 @@ const posts = defineCollection({
     draft: z.boolean().optional().default(false),
     pin: z.number().int().min(0).max(99).optional().default(0),
     toc: z.boolean().optional().default(themeConfig.global.toc),
-    lang: z.enum(['', ...allLocales]).optional().default(''),
+    lang: z.enum(contentLocales).optional().default(''),
     abbrlink: z.string().optional().default('').refine(
       abbrlink => !abbrlink || /^[a-z0-9\-]*$/.test(abbrlink),
       { message: 'Abbrlink can only contain lowercase letters, numbers and hyphens' },
@@ -31,7 +34,7 @@ const posts = defineCollection({
 const about = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/about' }),
   schema: z.object({
-    lang: z.enum(['', ...allLocales]).optional().default(''),
+    lang: z.enum(contentLocales).optional().default(''),
   }),
 })
 

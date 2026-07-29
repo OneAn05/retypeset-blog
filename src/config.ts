@@ -1,5 +1,9 @@
 import type { ThemeConfig } from '@/types'
 
+// Cloudflare Pages serves this project from the domain root, unlike GitHub
+// Pages which serves it below /retypeset-blog/.
+const isCloudflarePages = process.env.CF_PAGES === '1'
+
 export const themeConfig: ThemeConfig = {
   // SITE INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   site: {
@@ -14,10 +18,12 @@ export const themeConfig: ThemeConfig = {
     // author name
     author: 'CLion',
     // site url
-    url: 'https://onean05.github.io',
+    url: isCloudflarePages
+      ? (process.env.CF_PAGES_URL ?? 'https://retypeset-blog.pages.dev')
+      : 'https://onean05.github.io',
     // base path
     // root directory for all pages and assets
-    base: '/retypeset-blog/', // e.g., '/blog', '/docs'
+    base: isCloudflarePages ? '/' : '/retypeset-blog/', // e.g., '/blog', '/docs'
     // favicon url
     // recommended formats: svg, png or ico
     favicon: '/icons/favicon.svg', // or https://example.com/favicon.svg
