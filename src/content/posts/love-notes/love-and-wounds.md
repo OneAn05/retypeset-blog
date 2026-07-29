@@ -81,4 +81,7 @@ abbrlink: love-and-wounds
 
 所以，无论未来我们的故事会走向怎样的结局，我都很感谢这一次相遇。是你，让我第一次认真思考，原来爱并不是一种与生俱来的本能，而是一门需要学习一生的功课；也是你，让我第一次愿意停下来，不再急着向外寻找答案，而是开始回过头，认真面对自己。如果未来还有机会，我希望我能把今天写下的这些话，一点一点活成自己的样子——不是为了证明给谁看，也不是为了换来谁的原谅，只是希望很多年以后，当我再次回头看今天的时候，可以坦然地对那个曾经笨拙、幼稚、也真心爱过一个人的自己说：谢谢你没有一直停留在原地，也谢谢那个你深爱过的人，让你终于学会了，什么叫作爱。
 
-
+<div style="position: fixed; bottom: 20px; right: 30px; font-family: 'BNXJSDJW', '思源宋体', serif; font-size: 22px; color: #000000; font-weight: bold; text-align: right; line-height: 1.6; z-index: 9999;">
+  <img src="../../images/signature.svg" alt="赵宇航签名" style="width: 100px; height: auto;" />
+  <div style="margin-top: 4px;">June 29th, 2026</div>
+</div>

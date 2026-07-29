@@ -65,4 +65,7 @@ abbrlink: security
 
 所以到文章的最后，我想说，如果可以的话，就让时间慢慢走，我们慢慢来，不急着给关系下定义，也不急着奔向某个结果，只在一次次真诚的回应与陪伴里，让情感自然生长。若有一天，我们真的站在同一片黄昏之下，那一定不是因为勉强，而是因为彼此都愿意停下脚步，选择留下；若未来的路各自延伸，我也依然感谢这段相遇，让我曾如此认真、温柔地在你的世界里停留过，而这一份真心，本身就已经足够珍贵。
 
-
+<div style="position: fixed; bottom: 20px; right: 30px; font-family: 'BNXJSDJW', '思源宋体', serif; font-size: 22px; color: #000000; font-weight: bold; text-align: right; line-height: 1.6; z-index: 9999;">
+  <img src="../../images/signature.svg" alt="赵宇航签名" style="width: 100px; height: auto;" />
+  <div style="margin-top: 4px;">May 27th, 2026</div>
+</div>
