@@ -4,17 +4,17 @@ export const themeConfig: ThemeConfig = {
   // SITE INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   site: {
     // site title
-    title: 'My Static Blog',
+    title: '恋爱笔记',
     // site subtitle
-    subtitle: 'Notes, ideas, and work in progress',
+    subtitle: '记录爱与成长的日常',
     // site description
-    description: 'A multilingual static blog built with Astro. Replace this placeholder text with your own introduction.',
+    description: '恋爱笔记，记录爱与成长的日常。',
     // use i18n title/subtitle/description from src/i18n/ui.ts instead of static ones above
     i18nTitle: true, // true | false
     // author name
-    author: 'Your Name',
+    author: 'CLion',
     // site url
-    url: 'https://USERNAME.github.io',
+    url: 'https://onean05.github.io',
     // base path
     // root directory for all pages and assets
     base: '/retypeset-blog/', // e.g., '/blog', '/docs'
@@ -163,7 +163,7 @@ export const themeConfig: ThemeConfig = {
       },
       {
         name: 'GitHub',
-        url: 'https://github.com/USERNAME/retypeset-blog',
+        url: 'https://github.com/OneAn05/retypeset-blog',
       },
       {
         name: 'Email',

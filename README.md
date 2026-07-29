@@ -1,4 +1,4 @@
-# My Static Blog
+# 恋爱笔记
 
 A multilingual static blog built with [Astro](https://astro.build/). It preserves the typography-focused layout and blog features of its upstream reference while providing neutral starter branding for your own site.
 
@@ -29,12 +29,12 @@ Use `pnpm lint` for linting and `pnpm build` for a production build. Create a ne
 
 Update `src/config.ts` with your name, GitHub username, site URL, social links, and optional external service credentials. Update the six entries in `src/i18n/ui.ts` and the Markdown files under `src/content/` with your own content.
 
-The default GitHub Pages configuration publishes to `https://USERNAME.github.io/retypeset-blog/`. Replace every `USERNAME` placeholder before your first deployment.
+The default GitHub Pages configuration publishes to `https://onean05.github.io/retypeset-blog/`.
 
 ## GitHub Pages
 
 1. Create a GitHub repository named `retypeset-blog` under your account.
-2. Replace `USERNAME` in `src/config.ts` and `package.json` with your GitHub username.
+2. Confirm that `OneAn05` is your GitHub username in `src/config.ts` and `package.json`.
 3. Push the `main` branch to GitHub.
 4. In the repository settings, set Pages > Build and deployment > Source to **GitHub Actions**.
 
