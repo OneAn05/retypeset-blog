@@ -7,7 +7,6 @@ lang: zh-tw
 abbrlink: meaning-of-life
 ---
 
-**人生的意义**
 
 ![油菜花田](../_images/meaning-of-life-canola.jpg)
 
