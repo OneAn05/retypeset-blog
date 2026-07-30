@@ -1,4 +1,5 @@
 import type { ThemeConfig } from '@/types'
+import process from 'node:process'
 
 // Cloudflare Pages serves this project from the domain root, unlike GitHub
 // Pages which serves it below /retypeset-blog/.
@@ -18,8 +19,10 @@ export const themeConfig: ThemeConfig = {
     // author name
     author: 'CLion',
     // site url
+    // Keep SEO URLs stable: Cloudflare's CF_PAGES_URL contains a unique
+    // deployment address, not the public project domain.
     url: isCloudflarePages
-      ? (process.env.CF_PAGES_URL ?? 'https://retypeset-blog.pages.dev')
+      ? 'https://retypeset-blog.pages.dev'
       : 'https://onean05.github.io',
     // base path
     // root directory for all pages and assets

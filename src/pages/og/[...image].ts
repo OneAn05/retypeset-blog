@@ -8,7 +8,7 @@ const posts = await getCollection('posts')
 
 // Create slug-to-metadata lookup object for blog posts
 const pages = Object.fromEntries(
-  posts.map((post: CollectionEntry<'posts'>) => [
+  posts.filter(post => !post.data.draft).map((post: CollectionEntry<'posts'>) => [
     post.id,
     {
       title: post.data.title,
