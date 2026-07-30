@@ -7,7 +7,6 @@ lang: zh
 abbrlink: meaning-of-life
 ---
 
-
 ![油菜花田](../_images/meaning-of-life-canola.jpg)
 
 决定我们自身的不是过去的经历，而是我们自己赋予经历的意义。
