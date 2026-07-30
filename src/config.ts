@@ -46,7 +46,7 @@ export const themeConfig: ThemeConfig = {
       background: 'oklch(96% 0.005 298)',
       // highlight color
       // used for navbar, selected text, etc
-      highlight: 'rgb(49 116 229 / 0.5)', // #3174E5 at 50% opacity
+      highlight: 'rgb(11 61 145 / 0.5)', // #0B3D91 at 50% opacity
     },
     dark: {
       // primary color
@@ -56,7 +56,7 @@ export const themeConfig: ThemeConfig = {
       // background color
       background: 'oklch(22% 0.005 298)',
       // highlight color
-      highlight: 'rgb(49 116 229 / 0.2)', // #3174E5 at 20% opacity
+      highlight: 'rgb(11 61 145 / 0.2)', // #0B3D91 at 20% opacity
     },
   },
   // COLOR SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
