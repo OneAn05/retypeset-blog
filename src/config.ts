@@ -56,7 +56,7 @@ export const themeConfig: ThemeConfig = {
       // background color
       background: 'oklch(22% 0.005 298)',
       // highlight color
-      highlight: 'rgb(58 121 205 / 0.75)', // #3A79CD at 75% opacity; blends to a distinct, low-saturation cool blue on the dark background
+      highlight: 'rgb(79 131 190 / 0.9)', // #4F83BE at 90% opacity; blends near #4C7AAE for a clear, low-saturation cool blue on the dark background
     },
   },
   // COLOR SETTINGS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END
