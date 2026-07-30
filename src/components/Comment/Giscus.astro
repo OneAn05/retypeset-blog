@@ -36,23 +36,25 @@ const giscusConfig = {
   inputPosition,
   lang: giscusLocaleMap[lang],
 }
+
+const giscusThemeBase = `${base}/giscus`.replace(/\/\/{2,}/g, '/')
 ---
 
 <div
   id="giscus"
   class="giscus mt-16"
-  data-config={JSON.stringify(giscusConfig)}
+  data-config={JSON.stringify({ ...giscusConfig, themeBase: giscusThemeBase })}
 />
 
 <!-- Giscus Script >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 <script>
 let giscusContainer: HTMLElement | null = null
 
-function getThemeUrl() {
+function getThemeUrl(themeBase: string) {
   const isDark = document.documentElement.classList.contains('dark')
   return isDark
-    ? `${window.location.origin}/retypeset-blog/giscus/theme-dark.css`
-    : `${window.location.origin}/retypeset-blog/giscus/theme-light.css`
+    ? `${window.location.origin}${themeBase}/theme-dark.css`
+    : `${window.location.origin}${themeBase}/theme-light.css`
 }
 
 function updateGiscusTheme() {
@@ -60,6 +62,7 @@ function updateGiscusTheme() {
     return
   }
 
+  const { themeBase } = JSON.parse(giscusContainer.dataset.config) as { themeBase: string }
   const giscusWindow = giscusContainer.querySelector<HTMLIFrameElement>('iframe.giscus-frame')?.contentWindow
   if (!giscusWindow) {
     return
@@ -67,7 +70,7 @@ function updateGiscusTheme() {
 
   try {
     giscusWindow.postMessage(
-      { giscus: { setConfig: { theme: getThemeUrl() } } },
+      { giscus: { setConfig: { theme: getThemeUrl(themeBase) } } },
       'https://giscus.app',
     )
   }
@@ -86,12 +89,12 @@ function setupGiscus() {
 
   try {
     const config = JSON.parse(giscusContainer.dataset.config)
-    const { category, ...restConfig } = config
+    const { category, themeBase, ...restConfig } = config
 
     const dataAttributes: Record<string, string> = {
       ...restConfig,
       ...(category && { category }),
-      theme: getThemeUrl(),
+      theme: getThemeUrl(themeBase),
     }
 
     const script = document.createElement('script')
