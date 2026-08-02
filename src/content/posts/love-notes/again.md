@@ -79,23 +79,3 @@ abbrlink: again
 不喧哗，不勉强，不打扰。
 只是在往后的日子里，带着更成熟的自己，安静地、真诚地，珍惜你。
 
-
-```html
-<div style="
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  font-family: 'BNXJSDJW', '思源宋体', serif;
-  font-size: 22px;
-  color: #000000;
-  font-weight: bold;
-  text-align: right;
-  line-height: 1.6;
-  z-index: 9999;
-">
-  <!-- 本地 SVG 图片嵌入 -->
-  <img src="/Users/theclion/Library/Mobile Documents/com~apple~CloudDocs/下载/image (1).svg" alt="赵宇航签名" style="width: 100px; height: auto;" />
-  <div style="margin-top: 4px;">July 12th, 2026</div>
-</div>
-```
-
