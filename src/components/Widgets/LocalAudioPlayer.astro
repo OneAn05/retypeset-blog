@@ -1,0 +1,212 @@
+<script>
+const playerTag = 'local-spotify-player'
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
+
+function formatTime(seconds: number): string {
+  const safeSeconds = Number.isFinite(seconds) && seconds > 0 ? Math.floor(seconds) : 0
+  const minutes = Math.floor(safeSeconds / 60)
+  const remainder = safeSeconds % 60
+  return `${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`
+}
+
+function getAssetUrl(path: string): string {
+  return `${basePath}/${path.replace(/^\/+/, '')}`
+}
+
+class LocalSpotifyPlayer extends HTMLElement {
+  private audio: HTMLAudioElement | null = null
+  private animationFrame = 0
+  private progressLine: HTMLElement | null = null
+  private progressActive: HTMLElement | null = null
+  private timeText: HTMLElement | null = null
+  private playButton: HTMLButtonElement | null = null
+  private errorText: HTMLElement | null = null
+  private durationSeconds = 0
+
+  connectedCallback() {
+    if (this.shadowRoot) {
+      return
+    }
+
+    const source = this.getAttribute('src') ?? ''
+    const cover = this.getAttribute('cover') ?? ''
+    const title = this.getAttribute('title') ?? ''
+    const artist = this.getAttribute('artist') ?? ''
+    this.durationSeconds = Number(this.getAttribute('duration') ?? 0)
+
+    const shadow = this.attachShadow({ mode: 'open' })
+    shadow.innerHTML = `
+      <style>
+        :host{display:block;width:100%;min-width:280px;font-family:SpotifyMixUI,CircularSp,Helvetica,Arial,sans-serif}
+        *,*::before,*::after{box-sizing:border-box}
+        .widget{--background-base:rgb(20 89 117);--background-tinted:rgb(0 53 79);--text-base:#fff;--text-subdued:rgb(149 214 246);position:relative;height:152px;min-width:280px;overflow:hidden;isolation:isolate;color:var(--text-base);border-radius:12px}
+        .background{position:absolute;inset:0;z-index:0;background:var(--background-base)}
+        .grid{position:relative;z-index:1;display:grid;grid-template-columns:min-content minmax(0,1fr);width:100%;height:100%;padding:12px;column-gap:12px}
+        .cover-wrap{grid-row:1/span 3;align-self:center;justify-self:center;width:120px;height:120px;overflow:hidden;border-radius:8px;box-shadow:0 9px 9px rgb(0 0 0/10%),0 0 29px rgb(0 0 0/10%)}
+        .cover{display:block;width:100%;height:100%;object-fit:cover}
+        .logo-spacer{position:relative;grid-column:2;grid-row:1;height:24px;justify-self:end}
+        .metadata{display:flex;grid-column:2;grid-row:2;min-width:0;width:100%;flex-direction:column;align-self:center;gap:4px;overflow:hidden;user-select:none}
+        .title,.artist,.error{min-width:0;margin:0;overflow:hidden;text-align:start;white-space:nowrap;text-overflow:ellipsis}
+        .title{color:var(--text-base);font-size:14px;font-weight:700;line-height:20px}
+        .artist{color:var(--text-subdued);font-size:14px;font-weight:450;line-height:20px;opacity:.7}
+        .error{color:var(--text-base);font-size:11px;line-height:16px}
+        .controls{display:flex;grid-column:2;grid-row:3;align-self:end;flex-direction:row;column-gap:16px}
+        .baseline{display:flex;min-width:0;flex:1 1 auto;align-items:flex-end;justify-content:flex-end;column-gap:16px;margin-block-end:4px}
+        .progress-wrap{display:flex;min-width:0;flex:1 1 auto;align-items:center}
+        .progress-container{position:relative;display:flex;width:100%;height:16px;align-items:center;justify-content:center;overflow:hidden;user-select:none}
+        .progress-background{position:absolute;left:0;width:100%;height:4px;overflow:hidden;isolation:isolate;background:var(--background-tinted);border-radius:2px}
+        .progress-active,.progress-line{position:absolute;left:0;width:100%;height:4px;border-radius:2px;transform:translateX(-100%);will-change:transform}
+        .progress-active{background:rgb(255 255 255/30%)}
+        .progress-line{background:var(--text-base)}
+        .timer{position:relative;flex:0 0 auto;height:16px;margin:0;color:var(--text-base);font-size:11px;font-feature-settings:'tnum' on;font-variant-numeric:tabular-nums;line-height:16px;opacity:.7;user-select:none;white-space:nowrap}
+        .timer-spacer{visibility:hidden}.timer-text{position:absolute;top:0;right:0}
+        .play-wrap{width:32px;height:32px;flex:0 0 32px;z-index:1}
+        .play{display:grid;width:100%;height:100%;margin:0;padding:0;color:inherit;background:transparent;border:0;border-radius:50%;cursor:pointer;transition:transform .4s}
+        .play:hover{transform:scale(1.1)}.play svg{grid-area:1/1;width:100%;height:100%;fill:currentColor}
+        .pause-icon{display:none}.playing .play-icon{display:none}.playing .pause-icon{display:block}
+        .failed .controls{opacity:.45;pointer-events:none}
+        @media(max-width:509px){.cover-wrap{width:96px;height:96px}}
+        @media(max-width:359px){.grid{column-gap:8px}.controls,.baseline{column-gap:8px}}
+      </style>
+      <div class="widget">
+        <div class="background"></div>
+        <div class="grid">
+          <div class="cover-wrap"><img class="cover" alt=""></div>
+          <div class="logo-spacer" aria-hidden="true"></div>
+          <div class="metadata"><p class="title"></p><p class="artist"></p><p class="error" hidden>音频暂时无法加载</p></div>
+          <div class="controls">
+            <div class="baseline">
+              <div class="progress-wrap"><div class="progress-container" aria-hidden="true"><div class="progress-background"><div class="progress-active"></div><div class="progress-line"></div></div></div></div>
+              <span class="timer" aria-label="剩余播放时间"><span class="timer-spacer" aria-hidden="true">-00:00</span><span class="timer-text"></span></span>
+            </div>
+            <div class="play-wrap"><button class="play" type="button" aria-label="播放">
+              <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12m8.75-4.567a.5.5 0 0 0-.75.433v8.268a.5.5 0 0 0 .75.433l7.161-4.134a.5.5 0 0 0 0-.866z" /></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 1a11 11 0 1 1 0 22 11 11 0 0 1 0-22ZM8.5 8.5a1 1 0 0 1 2 0v7a1 1 0 1 1-2 0v-7Zm5 0a1 1 0 0 1 2 0v7a1 1 0 1 1-2 0v-7Z" clip-rule="evenodd" /></svg>
+            </button></div>
+          </div>
+        </div>
+      </div>`
+
+    const widget = shadow.querySelector<HTMLElement>('.widget')!
+    const coverImage = shadow.querySelector<HTMLImageElement>('.cover')!
+    const titleText = shadow.querySelector<HTMLElement>('.title')!
+    const artistText = shadow.querySelector<HTMLElement>('.artist')!
+    this.progressActive = shadow.querySelector<HTMLElement>('.progress-active')
+    this.progressLine = shadow.querySelector<HTMLElement>('.progress-line')
+    this.timeText = shadow.querySelector<HTMLElement>('.timer-text')
+    this.playButton = shadow.querySelector<HTMLButtonElement>('.play')
+    this.errorText = shadow.querySelector<HTMLElement>('.error')
+
+    titleText.textContent = title
+    artistText.textContent = artist
+    coverImage.alt = `${title} cover`
+    coverImage.src = getAssetUrl(cover)
+    this.timeText!.textContent = formatTime(this.durationSeconds)
+
+    this.audio = new Audio(getAssetUrl(source))
+    this.audio.preload = 'metadata'
+
+    const showError = () => {
+      widget.classList.add('failed')
+      this.errorText!.hidden = false
+    }
+
+    this.playButton!.addEventListener('click', async () => {
+      if (!this.audio) {
+        return
+      }
+      if (!this.audio.paused) {
+        this.audio.pause()
+        return
+      }
+      if (this.audio.ended || this.audio.currentTime >= this.durationSeconds) {
+        this.audio.currentTime = 0
+      }
+      document.dispatchEvent(new CustomEvent('local-spotify-player:play', { detail: this }))
+      try {
+        await this.audio.play()
+      }
+      catch {
+        showError()
+      }
+    })
+
+    document.addEventListener('local-spotify-player:play', this.handleOtherPlayer)
+    this.audio.addEventListener('loadedmetadata', () => {
+      if (this.audio && Number.isFinite(this.audio.duration) && this.audio.duration > 0) {
+        this.durationSeconds = this.audio.duration
+      }
+      this.updateProgress()
+    })
+    this.audio.addEventListener('play', () => {
+      widget.classList.add('playing')
+      this.playButton!.ariaLabel = '暂停'
+      this.startProgressLoop()
+    })
+    this.audio.addEventListener('pause', () => {
+      widget.classList.remove('playing')
+      this.playButton!.ariaLabel = '播放'
+      this.stopProgressLoop()
+      this.updateProgress()
+    })
+    this.audio.addEventListener('ended', () => {
+      widget.classList.remove('playing')
+      this.playButton!.ariaLabel = '播放'
+      this.stopProgressLoop()
+      this.updateProgress()
+    })
+    this.audio.addEventListener('error', showError)
+    coverImage.addEventListener('error', showError)
+    this.updateProgress()
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('local-spotify-player:play', this.handleOtherPlayer)
+    this.stopProgressLoop()
+    this.audio?.pause()
+  }
+
+  private handleOtherPlayer = (event: Event) => {
+    if ((event as CustomEvent<LocalSpotifyPlayer>).detail !== this) {
+      this.audio?.pause()
+    }
+  }
+
+  private startProgressLoop() {
+    this.stopProgressLoop()
+    const render = () => {
+      this.updateProgress()
+      if (this.audio && !this.audio.paused && !this.audio.ended) {
+        this.animationFrame = window.requestAnimationFrame(render)
+      }
+    }
+    this.animationFrame = window.requestAnimationFrame(render)
+  }
+
+  private stopProgressLoop() {
+    if (this.animationFrame) {
+      window.cancelAnimationFrame(this.animationFrame)
+    }
+    this.animationFrame = 0
+  }
+
+  private updateProgress() {
+    const currentTime = this.audio?.currentTime ?? 0
+    const percentage = this.durationSeconds > 0 ? Math.min(Math.max(currentTime / this.durationSeconds, 0), 1) * 100 : 0
+    const transform = `translateX(${percentage - 100}%)`
+    if (this.progressActive) {
+      this.progressActive.style.transform = transform
+    }
+    if (this.progressLine) {
+      this.progressLine.style.transform = transform
+    }
+    if (this.timeText) {
+      this.timeText.textContent = formatTime(Math.max(this.durationSeconds - currentTime, 0))
+    }
+  }
+}
+
+if (!window.customElements.get(playerTag)) {
+  window.customElements.define(playerTag, LocalSpotifyPlayer)
+}
+</script>

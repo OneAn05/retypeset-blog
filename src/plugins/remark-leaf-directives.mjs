@@ -2,7 +2,7 @@ import { visit } from 'unist-util-visit'
 
 const embedHandlers = {
   // GitHub Repository Card
-  github: (node) => {
+  'github': (node) => {
     const repo = node.attributes?.repo ?? ''
     if (!repo) {
       console.warn(`Missing GitHub repository`)
@@ -46,7 +46,7 @@ const embedHandlers = {
   },
 
   // Youtube
-  youtube: (node) => {
+  'youtube': (node) => {
     const videoId = node.attributes?.id ?? ''
     if (!videoId) {
       console.warn(`Missing YouTube video ID`)
@@ -61,7 +61,7 @@ const embedHandlers = {
   },
 
   // Bilibili
-  bilibili: (node) => {
+  'bilibili': (node) => {
     const bvid = node.attributes?.id ?? ''
     if (!bvid) {
       console.warn(`Missing Bilibili video ID`)
@@ -82,7 +82,7 @@ const embedHandlers = {
   },
 
   // Tweet Card
-  tweet: (node) => {
+  'tweet': (node) => {
     const url = node.attributes?.url ?? ''
     if (!url) {
       console.warn(`Missing Tweet URL`)
@@ -101,7 +101,7 @@ const embedHandlers = {
   },
 
   // CodePen
-  codepen: (node) => {
+  'codepen': (node) => {
     const url = node.attributes?.url ?? ''
     if (!url) {
       console.warn(`Missing CodePen URL`)
@@ -129,7 +129,7 @@ const embedHandlers = {
   },
 
   // Spotify
-  spotify: (node) => {
+  'spotify': (node) => {
     const url = node.attributes?.url ?? ''
     if (!url) {
       console.warn(`Missing Spotify URL`)
@@ -155,6 +155,38 @@ const embedHandlers = {
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
       ></iframe>
+    </figure>
+      `
+  },
+
+  // Local Audio Player
+  'local-audio': (node) => {
+    const source = node.attributes?.src ?? ''
+    const cover = node.attributes?.cover ?? ''
+    const title = node.attributes?.title ?? ''
+    const artist = node.attributes?.artist ?? ''
+    const duration = Number(node.attributes?.duration ?? 0)
+
+    if (!source || !cover || !title || !artist || !Number.isFinite(duration) || duration <= 0) {
+      console.warn('Invalid local audio player attributes')
+      return false
+    }
+
+    const escapeAttribute = value => String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('"', '&quot;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+
+    return `
+    <figure class="local-audio-embed no-heti">
+      <local-spotify-player
+        src="${escapeAttribute(source)}"
+        cover="${escapeAttribute(cover)}"
+        title="${escapeAttribute(title)}"
+        artist="${escapeAttribute(artist)}"
+        duration="${duration}"
+      ></local-spotify-player>
     </figure>
     `
   },
