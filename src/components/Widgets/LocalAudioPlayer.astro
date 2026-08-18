@@ -9,6 +9,15 @@ function formatTime(seconds: number): string {
   return `${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`
 }
 
+function getRemainingSeconds(duration: number, currentTime: number): number {
+  const displayDuration = Number.isFinite(duration) && duration > 0 ? Math.round(duration) : 0
+  const remaining = Number.isFinite(currentTime) && currentTime > 0
+    ? Math.ceil(duration - currentTime)
+    : displayDuration
+
+  return Math.min(Math.max(remaining, 0), displayDuration)
+}
+
 function getAssetUrl(path: string): string {
   return `${basePath}/${path.replace(/^\/+/, '')}`
 }
@@ -101,7 +110,7 @@ class LocalSpotifyPlayer extends HTMLElement {
     artistText.textContent = artist
     coverImage.alt = `${title} cover`
     coverImage.src = getAssetUrl(cover)
-    this.timeText!.textContent = formatTime(this.durationSeconds)
+    this.timeText!.textContent = formatTime(Math.round(this.durationSeconds))
 
     this.audio = new Audio(getAssetUrl(source))
     this.audio.preload = 'metadata'
@@ -201,7 +210,7 @@ class LocalSpotifyPlayer extends HTMLElement {
       this.progressLine.style.transform = transform
     }
     if (this.timeText) {
-      this.timeText.textContent = formatTime(Math.max(this.durationSeconds - currentTime, 0))
+      this.timeText.textContent = formatTime(getRemainingSeconds(this.durationSeconds, currentTime))
     }
   }
 }
