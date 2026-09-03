@@ -11,6 +11,10 @@ html[lang="zh-TW"] :is(.heti, .tag-list, .post-list h3) {
   font-family: "Huiwen Mingchao", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
+html:lang(zh-CN) body {
+  font-family: "LXGWWenKai-Regular", sans-serif;
+}
+
 /* Fix Flash Issue On iOS */
 body {
   backface-visibility: hidden;
