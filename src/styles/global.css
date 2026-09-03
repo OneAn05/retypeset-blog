@@ -13,7 +13,7 @@ html[lang="zh-TW"] :is(.heti, .tag-list, .post-list h3) {
 
 html:lang(zh-CN) body {
   font-family: "LXGWWenKai-Regular", sans-serif;
-  font-size: 20px; /* 可试 16px、17px、18px */
+  font-size: 18px; /* 可试 16px、17px、18px */
 }
 
 /* Fix Flash Issue On iOS */
