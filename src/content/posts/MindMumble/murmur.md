@@ -10,7 +10,7 @@ lang: ''
 abbrlink: murmur
 ---
 
-::spotify{url="https://open.spotify.com/track/0EuXMreBSine9u60CbJR0h"}
+![_图片描述](/Users/theclion/Documents/retypeset/retypeset-blog/src/content/posts/_images/meaning-of-life-canola.jpg)
 
 <br>
 
