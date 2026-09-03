@@ -159,9 +159,6 @@ lite-youtube > .lty-playbtn {
 .spotify-embed {
   --at-apply: 'w-full rounded-3';
 }
-.local-audio-embed {
-  --at-apply: 'my-6 w-full';
-}
 .twitter-tweet {
   --at-apply: 'mx-auto';
 }

@@ -10,7 +10,7 @@ lang: ''
 abbrlink: murmur
 ---
 
-::local-audio{src="/media/ichiban-no-takaramono/ichiban-no-takaramono.mp3" cover="/media/ichiban-no-takaramono/cover.jpg" title="Ichiban no Takaramono - Ichiban no Takaramono yori" artist="VISUAL ARTS / Key" duration=326}
+::spotify{url="https://open.spotify.com/track/0EuXMreBSine9u60CbJR0h"}
 
 <br>
 
