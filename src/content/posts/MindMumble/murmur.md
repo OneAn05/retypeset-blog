@@ -10,7 +10,7 @@ lang: ''
 abbrlink: murmur
 ---
 
-![_图片描述](/Users/theclion/Documents/retypeset/retypeset-blog/src/content/posts/_images/meaning-of-life-canola.jpg)
+![_图片描述](../_images/scenes-gathered-2cdbc8741.png)
 
 <br>
 
