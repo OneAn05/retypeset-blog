@@ -7,7 +7,7 @@ tags:
   - 安全感
   - 沟通
 lang: zh
-abbrlink: security
+abbrlink: love-courage
 ---
 
 
