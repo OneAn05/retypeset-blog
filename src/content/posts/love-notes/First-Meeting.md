@@ -7,7 +7,7 @@ tags:
   - 安全感
   - 见面
 lang: zh
-abbrlink: First-Meeting
+abbrlink: first-meeting
 ---
 
 
